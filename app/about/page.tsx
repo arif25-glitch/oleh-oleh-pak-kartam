@@ -13,11 +13,12 @@ export default function About() {
       <div className="container-fluid position-relative p-0">
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
           <a href="" className="navbar-brand pt-3 pb-3" >
-            <h1 className="text-primary m-0"><i className="fa fa-utensils me-3"></i>Waroeng Nongkie</h1>
-            <h1 className="m-0">
-              <span style={{ color: 'white' }}>By</span>{' '}
-              <span className="text-primary">Cha Cha Brownie</span>
-            </h1>
+            <div className="d-flex">
+              <h1 className="text-primary m-0">
+                <i className="fa fa-utensils me-3"></i>
+              </h1>
+              <h1 className="text-primary m-0">Oleh-Oleh <br></br>Pak Kartam</h1>
+            </div>
           </a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span className="fa fa-bars"></span>
@@ -26,7 +27,6 @@ export default function About() {
             <div className="navbar-nav ms-auto py-0 pe-4">
               <a href="/" className="nav-item nav-link">Home</a>
               <a href="/about" className="nav-item nav-link active">About</a>
-              <a href="/services" className="nav-item nav-link">Service</a>
               <a href="index.html" className="nav-item nav-link">Menu</a>
               <a href="https://wa.me/+6282182897993" className="nav-item nav-link">Kontak</a>
               <a href="/admin_login" className="nav-item nav-link">Admin</a>
@@ -41,19 +41,24 @@ export default function About() {
             <div className="row align-items-center">
               <div className="col-lg-12 text-center text-lg-start">
                 <h1 className="display-3 text-white animated slideInLeft mb-5 text-center mt-5">Tentang Kami</h1>
-                <p className="text-white animated slideInLeft mb-4 pb-2 mt-5 py-5 me-5 ms-5 pb-5 text-center" style={{fontSize: "24px", fontFamily: 'cursive'}}>Awalnya pemilik kafe ini yaitu Diana Ika Sari, sejak pertengahan tahun 2021
-                  melakukan  penjualan aneka produk makanan secara online dengan sistem Pre order,
-                  yang di  distribusikan secara langsung maupun pengiriman oleh kurir kepada pelanggan.
-                  Seiring bertambahnya minat konsumen terhadap produk nya, pemilik melebarkan
-                  usaha ke catering rumahan dengan menu ayam bakar,ikan bakar dan juga ayam  geprek.
-                  Pada momentum Ramadhan dan lebaran Idhul Fitri 2022 dan 2023 pemilik juga
-                  menjual berbagai produk khas lebaran berupa kue kering,kue basah,
-                  aneka bolu dan  brownies,serta cemilan seperti pempek, tekwan,dimsum dan siomay.
-                  Waroengnongkie by Cha-Cha Brownie berdiri sejak bulan Maret 2023,
-                  merupakan  sebuah kafe rumahan yang berkonsep minimalis modern dengan tema
-                  kekinian yang  menyajikan berbagai menu makanan, minuman serta cemilan .
-                  Selain itu,  waroengnongkie menyajikan beberapa menu andalan yang sudah
-                  terjual laris  dipasaran yaitu Home Made pizza, brownies panggang,aneka bolu dan pempek ikan.</p>
+                <p className="text-white animated slideInLeft mb-4 pb-2 mt-5 py-5 me-5 ms-5 pb-5 text-center" style={{ fontSize: "24px", fontFamily: 'cursive' }}>
+                Toko Oleh-Oleh &quot;Pak Kartam&quot; adalah pusat oleh-oleh khas Kabupaten 
+                Tulang Bawang Barat yang menyediakan produk unggulan dari berbagai UMKM lokal. 
+                Berdiri dengan visi menjadi pusat oleh-oleh terbesar di daerah, 
+                Toko Pak Kartam menawarkan beragam produk makanan dan minuman berkualitas tinggi, 
+                seperti kopi bubuk, lada, ketumbar, serta berbagai bumbu basah dan kering.
+                Berkembang dari usaha keluarga, Toko Pak Kartam juga memiliki misi meningkatkan 
+                kesejahteraan masyarakat sekitar melalui kolaborasi dengan UMKM lokal, 
+                menyediakan lapangan kerja, dan mendukung ekonomi daerah. Toko ini menjual 
+                produk-produk yang diproses secara tradisional tanpa bahan pengawet, 
+                menjamin kualitas dan keaslian rasa.
+                Dengan beragam pilihan produk, harga terjangkau, 
+                dan proses distribusi yang mencakup pembelian langsung dan online, 
+                Toko Pak Kartam menjadi pilihan tepat bagi siapa pun yang ingin 
+                menikmati oleh-oleh berkualitas khas Tulang Bawang Barat atau 
+                mendukung produk lokal Lampung.
+                  
+              </p>
               </div>
             </div>
           </div>

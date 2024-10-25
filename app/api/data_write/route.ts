@@ -1,84 +1,57 @@
-import fs from 'fs';
-import path from 'path';
-import { File } from 'buffer';
-import { MongoClient, ServerApiVersion } from "mongodb";
-
-const uri = "mongodb+srv://nongkiewaroeng:zaGapAi7eT2Hi0AV@cluster0.u5dci.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
+import cloudinary from "@/app/configs/cloudinary";
+import { client } from '@/app/configs/database_config';
 
 export async function POST(req: Request) {
-  try {
-    const formData = await req.formData();
-    const file = formData.get('gambar');
-    const harga = formData.get('harga');
-    const deskripsi = formData.get('deskripsi');
-    const kategori = formData.get('kategori');
-    const nama = formData.get('nama');
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+  const form = await req.formData();
+  const file = form.get('gambar') as File;
+  const harga = form.get('harga');
+  const deskripsi = form.get('deskripsi');
+  const kategori = form.get('kategori');
+  const nama = form.get('nama');
 
-    // input sanitization
-    const sanitizedKategori = kategori && typeof kategori === 'string' ? kategori : 'defaultCollection';
-    const sanitizedNama = nama && typeof nama === 'string' ? nama : 'defaultCollection';
-    const sanitizedDeskripsi = deskripsi && typeof deskripsi === 'string' ? deskripsi : 'defaultCollection';
-    const sanitizedHarga = harga && typeof harga === 'string' ? harga : 'defaultCollection';
+  const arrayBuffer = await file.arrayBuffer();
+  const fileBuffer = Buffer.from(arrayBuffer);
 
-    // variable instances
+  // sanitized variables
+  const sanitizedKategori = kategori && typeof kategori === 'string' ? kategori : 'defaultCollection';
+  const sanitizedNama = nama && typeof nama === 'string' ? nama : 'defaultCollection';
+  const sanitizedDeskripsi = deskripsi && typeof deskripsi === 'string' ? deskripsi : 'defaultCollection';
+  const sanitizedHarga = harga && typeof harga === 'string' ? harga : 'defaultCollection';
 
-    if (file instanceof File) {
-      if (!fs.existsSync(uploadDir)) {
-        fs.mkdirSync(uploadDir, { recursive: true });
-      }
-    
-      const fileName = file.name;
-      const filePath = path.join(uploadDir, fileName);
-      const buffer = Buffer.from(await file.arrayBuffer());
-      fs.writeFileSync(filePath, buffer);
+  cloudinary.uploader.upload_stream(
+    {
+      folder: 'images',
+      public_id: file.name,
+      resource_type: 'auto',
+    },
+    async (error, result) => {
+      if (error) return Object(error);
 
       try {
         await client.connect();
-        const database = client.db('waroengnongkie');
-        
+        const database = client.db('umkmpakkartam');
         const collection = database.collection(sanitizedKategori);
-        const result = await collection.insertOne({
+        const dbResult = await collection.insertOne({
           'nama': sanitizedNama,
           'harga': sanitizedHarga,
           'deskripsi': sanitizedDeskripsi,
-          'gambar': `/uploads/${fileName}`,
+          'gambar': result?.url,
+          'kategori': sanitizedKategori,
         });
-    
+
         return Response.json({
-          'status': 201,
-          'insertedID': result.insertedId,
-          'message': 'successful inserted',
-        });  
+          'status': 200,
+          'insertedID': dbResult.insertedId,
+          'message': 'success',
+        })
       } catch (err) {
-        console.error("An error occured: ", err);
-        
-      } finally {
-        await client.close();
+        console.error(err);
       }
     }
+  ).end(fileBuffer);
 
-    return Response.json({
-      'message': 'success',
-    });
+  return Response.json({
+    'status': 'successful',
 
-  }
-  catch (err) {
-    console.error(err)
-    return Response.json({
-      'error': 'api only accept form-data',
-    })
-  } finally {
-    return Response.json({
-      'status': 'success',
-      'message': 'api succesful accessed',
-    });
-  }
+  })
 }

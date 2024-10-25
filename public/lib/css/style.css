@@ -158,7 +158,7 @@
     background-size: 50%;
 }
 
-.hero-header img {
+/* .hero-header img {
     animation: imgRotate 50s linear infinite;
 }
 
@@ -166,7 +166,7 @@
     100% {
         transform: rotate(360deg);
     }
-}
+} */
 
 .breadcrumb-item+.breadcrumb-item::before {
     color: rgba(255, 255, 255, .5);

@@ -1,6 +1,6 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
 
-const uri = "mongodb+srv://nongkiewaroeng:zaGapAi7eT2Hi0AV@cluster0.u5dci.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = "mongodb+srv://umkmpakkartam:myAdmin123;@cluster0.dl16a.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -14,7 +14,7 @@ export async function POST(req: Request) {
 
   try {
     await client.connect();
-    const database = client.db('waroengnongkie');
+    const database = client.db('umkmpakkartam');
 
     const collection = database.collection(data['type']);
     const allData = await collection.find({}).toArray();
